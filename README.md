@@ -6,6 +6,9 @@ Only getting 10% accuracy after my initial method, which included trying a bunch
 data_set_0 = data_set_0[data_set_0['X_Intercept_Left'].apply(lambda x: pd.to_numeric(x))]
     data_set_1 = data_set_1[data_set_1['X_Intercept_Left'].apply(lambda x: pd.to_numeric(x))]
     data_set_2 = data_set_2[data_set_2['X_Intercept_Left'].apply(lambda x: not isinstance(x, (str)))]
+```
+and
+```python
     data_set_0[['X_Intercept_Left', 'X_Intercept_Right', 'Slope_Left', 'Slope_Right']] = \
         data_set_0[['X_Intercept_Left', 'X_Intercept_Right', 'Slope_Left', 'Slope_Right']].apply(pd.to_numeric)
     data_set_1[['X_Intercept_Left', 'X_Intercept_Right', 'Slope_Left', 'Slope_Right']] = \
