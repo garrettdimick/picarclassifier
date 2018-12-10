@@ -20,3 +20,17 @@ Had to shape all of the data to the format that I needed. Decided to use x_inter
 ``` right released,right pressed,right released,right pressed,right released ``` became simply ```right pressed, right released```. I made this decision because I assume that several commands are a product of minor adjustments from the operator. I also believe that having less potential labels will help the classifier make better decisions. For the most part really long commands don't make sense to me, so I reduced them to simpler ones.
 After finally figuring this out, taking a sort of naive approach, trained classifier again. Got 84% accuracy on 100 tree Random Forest. 83% for 200. 84% for 300. 84% for 400. 83% for 500. Got 88% for 1,000. I wasn't expecting to see any increase in the accuracy of the model by increasing the number of trees. I think it was a coincidence, didn't see any improvement on several more attempts with 1,000 trees. After several more I got values between 80 and 90% accuracy.
 Wanted to maybe tweak some parameters to see if I could improve performance. Also wanted to see which features are the most important, because I am not so sure that the x intercept values are as important as the slope values.
+I used the feature importances variable from scikit learn to do the following:
+```python
+    feature_imp = pd.Series(clf.feature_importances_, index=['X_Intercept_Left', 'X_Intercept_Right', 'Slope_Left', 'Slope_Right']).sort_values(ascending=False)
+print feature_imp
+```
+which produced the output
+```
+X_Intercept_Right    0.272514
+Slope_Right          0.255111
+X_Intercept_Left     0.248655
+Slope_Left           0.223719
+dtype: float64
+``` 
+This did not support my thought that the slopes were more important that the left and right x intercepts.
