@@ -38,3 +38,15 @@ This did not support my thought that the slopes were more important that the lef
 Next, in an attempt to improve the accuracy of the classifier, I tried Random Search Cross Validation, which is RandomizedSearchCV in sklearn. This allows for some (kind of) systematic, random hyperparameter tuning. From this, I found the best hyperparameters to tune using best_params_. 
 best_params_ are {'n_estimators': 611, 'min_samples_split': 2, 'bootstrap': True, 'max_depth': None, 'min_samples_leaf': 1}
 The random search grid only provided about a 2% increase from the average accuracy I had been getting with no parameter tuning. Began training some classifiers with the newly discovered "best parameters." The accuracy of the classifier trained with the "best parameters" was 86.38 percent, and the classifier I trained with no tuning at all alongside it got an accuracy of 86.8 percent. At this point, I determined that I was probably no longer going to get more benefits from tuning parameters, at least with how slow my machine is. The best thing to do to make my classifier more accurate would be to collect more data and train it on that data. I think that random forests are a viable option for this type of classification, and hopefully it won't drive the picar off of a bridge or anything.
+
+In order to run the code: 
+If inside RF_tester.py:
+Change the filepath variable on line 3 in RF_tester.py
+If not, you can import RF_tester and use the methods defined in RF_tester.py to get commands for the picar from a classifier.
+Next, you can do one of two things: 
+1. call load_forest(classifier_path) with your newly set path, then call make_decision(left_x_int, right_x_int, left_slope, right_slope, classifier) and pass it the classifier that is loaded by load_forest, this will make a prediction.
+or
+2. call load_classifier_make_decision(left_x_int, right_x_int, left_slope, right_slope, classifier_path), which will load the classifier from the given path and make a prediction.
+
+Both of these methods return a tuple of two string values which can be given to the picar_key_receiver:
+('up pressed', 'up released'),  ('down pressed, down released'), ('left pressed, left released'), ('right pressed, right released')
