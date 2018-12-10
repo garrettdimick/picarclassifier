@@ -35,4 +35,6 @@ dtype: float64
 ``` 
 This did not support my thought that the slopes were more important that the left and right x intercepts.
 
-Next, in an attempt to improve the accuracy of the classifier, I tried Random Search Cross Validation, which is RandomizedSearchCV in sklearn. This allows for some (kind of) systematic, random hyperparameter tuning. From this, I found the best hyperparameters to tune using best_params_. Using these parameters I performed a full Grid Search training, which uses all of the defined parameters instead of just the randomly chosen ones. 
+Next, in an attempt to improve the accuracy of the classifier, I tried Random Search Cross Validation, which is RandomizedSearchCV in sklearn. This allows for some (kind of) systematic, random hyperparameter tuning. From this, I found the best hyperparameters to tune using best_params_. 
+best_params_ are {'n_estimators': 611, 'min_samples_split': 2, 'bootstrap': True, 'max_depth': None, 'min_samples_leaf': 1}
+The random search grid only provided about a 2% increase from the average accuracy I had been getting with no parameter tuning. Began training some classifiers with the newly discovered "best parameters."
